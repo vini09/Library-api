@@ -13,40 +13,34 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_user")
-public class User implements Serializable{
+@Table(name = "tb_category")
+public class Category implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String name;
-	private String email;
-	private String phone;
-	private Boolean active;
 	
-	@OneToMany(mappedBy = "user")
-	private List<Loan> loan = new ArrayList<>();
+	@OneToMany(mappedBy = "category")
+	private List<Book> books = new ArrayList<>();
 	
-	public User() {
+	public Category() {
 		
 	}
 	
-	public User(Long id, String name, String email, String phone, Boolean active) {
-		super();
+	public Category(Long id, String name) {
 		this.id = id;
 		this.name = name;
-		this.email = email;
-		this.phone = phone;
-		this.active = active;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
-		this.id =  id;
+		this.id = id;
 	}
 
 	public String getName() {
@@ -57,32 +51,8 @@ public class User implements Serializable{
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public Boolean getActive() {
-		return active;
-	}
-
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
-	
-	public List<Loan> getLoan(){
-		return loan;
+	public List<Book> getBooks() {
+		return books;
 	}
 
 	@Override
@@ -98,10 +68,9 @@ public class User implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Category other = (Category) obj;
 		return Objects.equals(id, other.id);
 	}
-	
 	
 	
 }

@@ -30,6 +30,10 @@ public class Book implements Serializable{
 	@JoinColumn(name = "author_id")
 	private Author author;
 	
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
+	
 	public Book() {
 		
 	}

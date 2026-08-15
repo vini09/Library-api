@@ -3,6 +3,8 @@ package com.viniciussilva.library_api.entities;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.viniciussilva.library_api.entities.enums.LoanStatus;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +24,7 @@ public class Loan {
 	private LocalDate loanDate;
 	private LocalDate dueDate;
 	private LocalDate returnDate;
-	//private LoanStatus status;
+    private Integer status;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_ id")
@@ -36,12 +38,14 @@ public class Loan {
 		
 	}
 	
-	public Loan(Long id, LocalDate loanDate, LocalDate dueDate, LocalDate returnDate) {
+	public Loan(Long id, LocalDate loanDate, LocalDate dueDate, LocalDate returnDate, LoanStatus status) {
 		this.id = id;
 		this.loanDate = loanDate;
 		this.dueDate = dueDate;
 		this.returnDate = returnDate;
+		setStatus(status);
 	}
+
 
 	public Long getId() {
 		return id;
@@ -73,6 +77,18 @@ public class Loan {
 
 	public void setReturnDate(LocalDate returnDate) {
 		this.returnDate = returnDate;
+	}
+	
+	
+
+	public LoanStatus getStatus() {
+		return LoanStatus.valueOf(status);
+	}
+
+	public void setStatus(LoanStatus status) {
+		if(status != null) {
+			this.status = status.getCode();
+		}
 	}
 
 	@Override

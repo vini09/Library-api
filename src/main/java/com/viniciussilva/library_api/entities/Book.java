@@ -1,6 +1,8 @@
 package com.viniciussilva.library_api.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -9,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,6 +36,9 @@ public class Book implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
+	
+	@OneToMany(mappedBy = "book")
+	private List<Loan> loans = new ArrayList<>();
 	
 	public Book() {
 		
@@ -93,6 +99,23 @@ public class Book implements Serializable{
 
 	public void setAvailableCopies(Integer availableCopies) {
 		this.availableCopies = availableCopies;
+	}
+
+	
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	@Override
